@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleta</title>
+    <style type="text/css" media="all">
+
+        body {
+            background-color: rgb(70, 140, 215);
+            font: normal 15pt Arial;
+        }
+
+        header {
+            color: white;
+            text-align: center;
+        }
+
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Roleta</h1>
+    </header>
+
+    <section>
+
+        <p>
+            Digite algo para a Roleta <input type="text" name="val" id="val">
+        </p>
+        <input type="button" name="adicionar" id="adicionar" value="Adicionar" onclick="adicionar()" />
+        <select name="roleta" id="roleta" size="10">
+
+        </select>
+        <input type="button" name="rodar" id="rodar" value="Rodar" onclick="rodar()" />
+    </select>
+    <div id="res">
+
+    </div>
+</section>
+<script>
+    var val = document.getElementById("val")
+    var res = document.getElementById("res")
+    var roleta = document.getElementById("roleta")
+    var roletaVal = []
+
+    function adicionar() {
+        if (val.value.length === 0) {
+            res.innerHTML = "<p>Digite algum valor para colocar na roleta</p>"
+        } else if (roletaVal.indexOf(val.value) == -1) {
+            res.innerHTML = ""
+            var item = document.createElement('option')
+            item.text = val.value
+            roleta.appendChild(item)
+            roletaVal.push(item.value)
+            res.innerHTML = `<p>Foi adicionado o valor ${item.value}`
+        } else {
+            res.innerHTML = "<p>Esse valor já foi colocado</p>"
+        }
+    }
+
+    function rodar() {
+        if (roletaVal.length == 0) {
+            rew.innerHTML = "Coloque algo na roleta para girar"
+        } else if (roletaVal.length == 1) {
+            res.innerHTML = `<p>Só existe um valor: ${roletaVal}`
+        } else {
+            var sort = roletaVal[Math.floor(Math.random() * roletaVal.length)]
+            res.innerHTML = `<p>O valor sorteado foi o ${sort}</p>`
+        }
+    }
+</script>
+</body>
+</html>
